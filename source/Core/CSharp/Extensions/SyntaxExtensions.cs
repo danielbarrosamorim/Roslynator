@@ -3113,6 +3113,46 @@ namespace Roslynator.CSharp
 
             return (TNode)ChangeAccessibilityHelper.ChangeAccessibility(node, newAccessibility, comparer);
         }
+
+        internal static SyntaxTrivia GetIndentation(this SyntaxNode node, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            SyntaxTree tree = node.SyntaxTree;
+
+            if (tree != null)
+            {
+                TextSpan span = node.Span;
+
+                int lineStartIndex = span.Start - tree.GetLineSpan(span, cancellationToken).StartLinePosition.Character;
+
+                while (!node.FullSpan.Contains(lineStartIndex))
+                    node = node.Parent;
+
+                SyntaxToken token = node.FindToken(lineStartIndex);
+
+                if (!token.IsKind(SyntaxKind.None))
+                {
+                    SyntaxTriviaList leadingTrivia = token.LeadingTrivia;
+
+                    if (leadingTrivia.Any()
+                        && leadingTrivia.FullSpan.Contains(lineStartIndex))
+                    {
+                        SyntaxTrivia trivia = leadingTrivia.Last();
+
+                        if (trivia.IsWhitespaceTrivia())
+                            return trivia;
+                    }
+                }
+            }
+
+            return EmptyWhitespace();
+        }
+
+        internal static SyntaxTriviaList GetIncreasedIndentation(this SyntaxNode node, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            SyntaxTrivia trivia = GetIndentation(node, cancellationToken);
+
+            return IncreaseIndentation(trivia);
+        }
         #endregion SyntaxNode
 
         #region SyntaxToken

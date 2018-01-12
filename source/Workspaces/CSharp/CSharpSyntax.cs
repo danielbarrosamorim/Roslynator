@@ -6,7 +6,7 @@ using static Roslynator.CSharp.CSharpFactory;
 
 namespace Roslynator.CSharp
 {
-    internal static class CSharpSyntaxParts
+    internal static class CSharpSyntax
     {
         #region If
         public static IfStatementSyntax IfReturn(ExpressionSyntax expression)

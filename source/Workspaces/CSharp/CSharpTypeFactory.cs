@@ -5,81 +5,81 @@ using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace Roslynator.CSharp
 {
-    public static class CSharpTypeFactory
+    internal static class CSharpTypeFactory
     {
-        internal static TypeSyntax BoolType(bool simplifiable = true)
+        public static TypeSyntax BoolType()
         {
-            return ParseTypeName("global::System.Boolean").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.Boolean").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax ByteType(bool simplifiable = true)
+        public static TypeSyntax ByteType()
         {
-            return ParseTypeName("global::System.Byte").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.Byte").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax SByteType(bool simplifiable = true)
+        public static TypeSyntax SByteType()
         {
-            return ParseTypeName("global::System.SByte").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.SByte").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax IntType(bool simplifiable = true)
+        public static TypeSyntax IntType()
         {
-            return ParseTypeName("global::System.Int32").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.Int32").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax UIntType(bool simplifiable = true)
+        public static TypeSyntax UIntType()
         {
-            return ParseTypeName("global::System.UInt32").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.UInt32").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax ShortType(bool simplifiable = true)
+        public static TypeSyntax ShortType()
         {
-            return ParseTypeName("global::System.Int16").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.Int16").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax UShortType(bool simplifiable = true)
+        public static TypeSyntax UShortType()
         {
-            return ParseTypeName("global::System.UInt16").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.UInt16").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax LongType(bool simplifiable = true)
+        public static TypeSyntax LongType()
         {
-            return ParseTypeName("global::System.Int64").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.Int64").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax ULongType(bool simplifiable = true)
+        public static TypeSyntax ULongType()
         {
-            return ParseTypeName("global::System.UInt64").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.UInt64").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax FloatType(bool simplifiable = true)
+        public static TypeSyntax FloatType()
         {
-            return ParseTypeName("global::System.Single").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.Single").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax DoubleType(bool simplifiable = true)
+        public static TypeSyntax DoubleType()
         {
-            return ParseTypeName("global::System.Double").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.Double").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax DecimalType(bool simplifiable = true)
+        public static TypeSyntax DecimalType()
         {
-            return ParseTypeName("global::System.Decimal").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.Decimal").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax StringType(bool simplifiable = true)
+        public static TypeSyntax StringType()
         {
-            return ParseTypeName("global::System.String").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.String").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax CharType(bool simplifiable = true)
+        public static TypeSyntax CharType()
         {
-            return ParseTypeName("global::System.Char").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.Char").WithSimplifierAnnotation();
         }
 
-        internal static TypeSyntax ObjectType(bool simplifiable = true)
+        public static TypeSyntax ObjectType()
         {
-            return ParseTypeName("global::System.Object").WithSimplifierAnnotationIf(simplifiable);
+            return ParseTypeName("global::System.Object").WithSimplifierAnnotation();
         }
     }
 }

@@ -119,7 +119,6 @@
     <Compile Include="CSharp\Syntax\StatementsInfo.cs" />
     <Compile Include="CSharp\Syntax\SingleLocalDeclarationStatementInfo.cs" />
     <Compile Include="DirectiveRemoveOptions.cs" />
-    <Compile Include="CSharp\CSharpFormatter.cs" />
     <Compile Include="CSharp\Documentation\DocumentationCommentGenerator.cs" />
     <Compile Include="CSharp\Documentation\DocumentationCommentGeneratorSettings.cs" />
     <Compile Include="CSharp\EmbeddedStatementHelper.cs" />

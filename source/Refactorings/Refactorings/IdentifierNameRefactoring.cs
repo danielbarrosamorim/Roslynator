@@ -51,7 +51,7 @@ namespace Roslynator.CSharp.Refactorings
                             string newName = StringUtility.ToCamelCase(propertySymbol.Name, context.Settings.PrefixFieldIdentifierWithUnderscore);
 
                             if (!string.Equals(fieldSymbol.Name, newName, StringComparison.Ordinal)
-                                && await SolutionNameGenerator.IsUniqueMemberNameAsync(
+                                && await WorkspaceNameGenerator.IsUniqueMemberNameAsync(
                                     newName,
                                     fieldSymbol,
                                     context.Solution,

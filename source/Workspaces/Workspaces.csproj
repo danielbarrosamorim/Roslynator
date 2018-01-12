@@ -42,7 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CSharp\CodeFixes\AbstractCodeFixProvider.cs" />
-    <Compile Include="CSharp\CSharpSyntaxParts.cs" />
+    <Compile Include="CSharp\CSharpSyntax.cs" />
     <Compile Include="CSharp\CSharpTypeFactory.cs" />
     <Compile Include="CSharp\DocumentFormatter.cs" />
     <Compile Include="CSharp\Extensions\DocumentExtensions.cs" />
@@ -53,8 +53,7 @@
     <Compile Include="Extensions\CodeFixContextExtensions.cs" />
     <Compile Include="Extensions\DocumentExtensions.cs" />
     <Compile Include="Extensions\SolutionExtensions.cs" />
-    <Compile Include="Extensions\WithAnnotationExtensions.cs" />
-    <Compile Include="SolutionNameGenerator.cs" />
+    <Compile Include="WorkspaceNameGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SyntaxFinder.cs" />
   </ItemGroup>

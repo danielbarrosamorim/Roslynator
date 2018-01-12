@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.FindSymbols;
 
 namespace Roslynator
 {
-    internal static class SolutionNameGenerator
+    internal static class WorkspaceNameGenerator
     {
         internal static async Task<string> EnsureUniqueMemberNameAsync(
             string baseName,

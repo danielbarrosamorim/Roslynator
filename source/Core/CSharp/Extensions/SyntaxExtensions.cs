@@ -660,39 +660,6 @@ namespace Roslynator.CSharp
         #endregion EventFieldDeclarationSyntax
 
         #region ExpressionSyntax
-        public static ParenthesizedExpressionSyntax Parenthesize(
-            this ExpressionSyntax expression,
-            bool includeElasticTrivia = true,
-            bool simplifiable = true)
-        {
-            ParenthesizedExpressionSyntax parenthesizedExpression = null;
-
-            if (includeElasticTrivia)
-            {
-                parenthesizedExpression = ParenthesizedExpression(expression.WithoutTrivia());
-            }
-            else
-            {
-                parenthesizedExpression = ParenthesizedExpression(
-                    Token(SyntaxTriviaList.Empty, SyntaxKind.OpenParenToken, SyntaxTriviaList.Empty),
-                    expression.WithoutTrivia(),
-                    Token(SyntaxTriviaList.Empty, SyntaxKind.CloseParenToken, SyntaxTriviaList.Empty));
-            }
-
-            return parenthesizedExpression
-                .WithTriviaFrom(expression)
-                .WithSimplifierAnnotationIf(simplifiable);
-        }
-
-        internal static ExpressionSyntax ParenthesizeIf(
-            this ExpressionSyntax expression,
-            bool condition,
-            bool includeElasticTrivia = true,
-            bool simplifiable = true)
-        {
-            return (condition) ? Parenthesize(expression, includeElasticTrivia, simplifiable) : expression;
-        }
-
         public static ExpressionSyntax WalkUpParentheses(this ExpressionSyntax expression)
         {
             while (expression?.Parent?.Kind() == SyntaxKind.ParenthesizedExpression)
@@ -2067,13 +2034,6 @@ namespace Roslynator.CSharp
             return tree.IsMultiLineSpan(span, cancellationToken);
         }
         #endregion SeparatedSyntaxList<T>
-
-        #region SimpleNameSyntax
-        public static MemberAccessExpressionSyntax QualifyWithThis(this SimpleNameSyntax simpleName, bool simplifiable = true)
-        {
-            return SimpleMemberAccessExpression(ThisExpression(), simpleName).WithSimplifierAnnotationIf(simplifiable);
-        }
-        #endregion SimpleNameSyntax
 
         #region StatementSyntax
         private static StatementSyntax GetSingleStatementOrDefault(StatementSyntax statement)

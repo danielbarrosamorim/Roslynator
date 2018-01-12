@@ -8,36 +8,6 @@ namespace Roslynator.CSharp
 {
     internal static class CSharpSyntaxParts
     {
-        public static MethodDeclarationSyntax ObjectEqualsMethodDeclaration(
-            TypeSyntax type,
-            string parameterName = "obj",
-            string localName = "other")
-        {
-            return MethodDeclaration(
-                Modifiers.PublicOverride(),
-                BoolType(),
-                Identifier("Equals"),
-                ParameterList(Parameter(ObjectType(), parameterName)),
-                Block(
-                    IfNotReturnFalse(
-                        IsPatternExpression(
-                            IdentifierName(parameterName),
-                            DeclarationPattern(
-                                type,
-                                SingleVariableDesignation(Identifier(localName))))),
-                    ThrowNewNotImplementedExceptionStatement()));
-        }
-
-        public static MethodDeclarationSyntax ObjectGetHashCodeMethodDeclaration()
-        {
-            return MethodDeclaration(
-                Modifiers.PublicOverride(),
-                IntType(),
-                "GetHashCode",
-                ParameterList(),
-                Block(ThrowNewNotImplementedExceptionStatement()));
-        }
-
         #region If
         public static IfStatementSyntax IfReturn(ExpressionSyntax expression)
         {

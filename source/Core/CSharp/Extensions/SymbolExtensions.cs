@@ -89,35 +89,39 @@ namespace Roslynator.CSharp
             if (parameterSymbol == null)
                 throw new ArgumentNullException(nameof(parameterSymbol));
 
-            if (parameterSymbol.HasExplicitDefaultValue)
+            if (!parameterSymbol.HasExplicitDefaultValue)
+                throw new ArgumentException("Parameter must specify default value.", nameof(parameterSymbol));
+
+            object value = parameterSymbol.ExplicitDefaultValue;
+
+            ITypeSymbol typeSymbol = parameterSymbol.Type;
+
+            if (typeSymbol.IsEnum())
             {
-                object value = parameterSymbol.ExplicitDefaultValue;
+                if (value == null)
+                    return NullLiteralExpression();
 
-                ITypeSymbol type = parameterSymbol.Type;
+                IFieldSymbol fieldSymbol = typeSymbol.FindField(f => f.HasConstantValue && value.Equals(f.ConstantValue));
 
-                if (type.IsEnum())
+                TypeSyntax type = typeSymbol.ToMinimalTypeSyntax(semanticModel, position, format);
+
+                if (fieldSymbol != null)
                 {
-                    if (value != null)
-                    {
-                        IFieldSymbol fieldSymbol = type.FindField(f => f.HasConstantValue && value.Equals(f.ConstantValue));
-
-                        if (fieldSymbol != null)
-                        {
-                            return SimpleMemberAccessExpression(type.ToMinimalTypeSyntax(semanticModel, position, format), IdentifierName(fieldSymbol.Name));
-                        }
-                        else
-                        {
-                            return CastExpression(type.ToMinimalTypeSyntax(semanticModel, position, format), LiteralExpression(value));
-                        }
-                    }
+                    return SimpleMemberAccessExpression(type, IdentifierName(fieldSymbol.Name));
                 }
                 else
                 {
-                    return LiteralExpression(value);
+                    return CastExpression(type, LiteralExpression(value));
                 }
             }
 
-            return null;
+            if (value == null
+                && !typeSymbol.IsReferenceTypeOrNullableType())
+            {
+                return DefaultExpression(typeSymbol.ToMinimalTypeSyntax(semanticModel, position, format));
+            }
+
+            return LiteralExpression(value);
         }
         #endregion IParameterSymbol
 
